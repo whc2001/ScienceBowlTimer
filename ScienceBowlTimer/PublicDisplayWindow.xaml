@@ -5,7 +5,8 @@
         WindowState="Maximized"
         WindowStyle="None"
         Background="Black"
-        Topmost="True">
+        Topmost="True"
+        Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
