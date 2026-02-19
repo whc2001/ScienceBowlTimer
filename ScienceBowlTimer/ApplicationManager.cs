@@ -6,15 +6,10 @@ using WinForms = System.Windows.Forms;
 
 namespace ScienceBowlTimer
 {
-    /// <summary>
-    /// Central application manager that owns all resources and ensures proper cleanup.
-    /// This ensures the keyboard hook and other resources are properly disposed
-    /// no matter which window triggers the application shutdown.
-    /// </summary>
     public class ApplicationManager
     {
         private readonly PublicDisplayWindow _publicDisplay;
-        private readonly MainWindow _controlPanel;
+        private readonly ControlWindow _controlPanel;
         private readonly TimerManager _timerManager;
         private readonly AudioManager _audioManager;
         private readonly GlobalKeyboardHook _keyboardHook;
@@ -24,7 +19,7 @@ namespace ScienceBowlTimer
         public ApplicationManager()
         {
             _publicDisplay = new PublicDisplayWindow();
-            _controlPanel = new MainWindow();
+            _controlPanel = new ControlWindow();
             _timerManager = new TimerManager();
             _audioManager = new AudioManager(AppDomain.CurrentDomain.BaseDirectory);
             _keyboardHook = new GlobalKeyboardHook();
@@ -137,6 +132,9 @@ namespace ScienceBowlTimer
         {
             // Cleanup: Dispose of keyboard hook to unhook from system
             _keyboardHook?.Dispose();
+
+            // Cleanup: Dispose of audio manager to release audio resources
+            _audioManager?.Dispose();
         }
     }
 }

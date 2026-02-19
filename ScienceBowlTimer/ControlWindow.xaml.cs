@@ -3,11 +3,7 @@ using System.Windows;
 
 namespace ScienceBowlTimer
 {
-    /// <summary>
-    /// Control panel window for the Science Bowl timer.
-    /// This is a view class that raises events for the ApplicationManager to handle.
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class ControlWindow : Window
     {
         public event Action? StartFirstHalfClicked;
         public event Action? StartSecondHalfClicked;
@@ -18,7 +14,7 @@ namespace ScienceBowlTimer
         public event Action? StopQuestionTimerClicked;
         public event Action? SwapDisplaysClicked;
 
-        public MainWindow()
+        public ControlWindow()
         {
             InitializeComponent();
         }
