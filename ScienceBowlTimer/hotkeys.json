@@ -1,0 +1,9 @@
+{
+  "StartFirstHalf": "F1",
+  "StartSecondHalf": "F2",
+  "StopTimer": "F3",
+  "StartTossUp": "F5",
+  "StartBonus": "F6",
+  "RestartLast": "F7",
+  "StopQuestionTimer": "F8"
+}
