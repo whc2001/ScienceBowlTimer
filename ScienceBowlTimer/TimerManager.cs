@@ -54,6 +54,7 @@ namespace ScienceBowlTimer
         {
             _currentHalf = GameHalf.First;
             _halfTimeRemaining = TimeSpan.FromMinutes(8);
+            _halfTimer.Stop(); // Stop first to reset the tick cycle
             _halfTimer.Start();
             HalfChanged?.Invoke("FIRST HALF");
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
@@ -63,6 +64,7 @@ namespace ScienceBowlTimer
         {
             _currentHalf = GameHalf.Second;
             _halfTimeRemaining = TimeSpan.FromMinutes(8);
+            _halfTimer.Stop(); // Stop first to reset the tick cycle
             _halfTimer.Start();
             HalfChanged?.Invoke("SECOND HALF");
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
@@ -82,6 +84,7 @@ namespace ScienceBowlTimer
             _questionSecondsRemaining = 5;
             _lastQuestionSeconds = 5;
             _questionTimerStopped = false;
+            _questionTimer.Stop(); // Stop first to reset the tick cycle
             _questionTimer.Start();
             QuestionTypeChanged?.Invoke("TOSS-UP");
             CountdownChanged?.Invoke(_questionSecondsRemaining.ToString());
@@ -93,6 +96,7 @@ namespace ScienceBowlTimer
             _questionSecondsRemaining = 20;
             _lastQuestionSeconds = 20;
             _questionTimerStopped = false;
+            _questionTimer.Stop(); // Stop first to reset the tick cycle
             _questionTimer.Start();
             QuestionTypeChanged?.Invoke("BONUS");
             CountdownChanged?.Invoke(_questionSecondsRemaining.ToString());
@@ -104,13 +108,14 @@ namespace ScienceBowlTimer
             {
                 _questionSecondsRemaining = _lastQuestionSeconds;
                 _questionTimerStopped = false;
+                _questionTimer.Stop(); // Stop first to reset the tick cycle
                 _questionTimer.Start();
-                
+
                 if (_currentQuestionType == QuestionType.TossUp)
                     QuestionTypeChanged?.Invoke("TOSS-UP");
                 else if (_currentQuestionType == QuestionType.Bonus)
                     QuestionTypeChanged?.Invoke("BONUS");
-                    
+
                 CountdownChanged?.Invoke(_questionSecondsRemaining.ToString());
             }
         }
