@@ -2,6 +2,7 @@ using ScienceBowlTimer.WinAPI;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using WinForms = System.Windows.Forms;
 
@@ -63,15 +64,14 @@ namespace ScienceBowlTimer
             window.WindowState = WindowState.Normal;
             window.WindowStartupLocation = WindowStartupLocation.Manual;
 
-            // Get DPI scale factor of the PRIMARY monitor for coordinate conversion
-            // WPF uses the primary monitor's DPI for virtual screen coordinates
-            var primaryDpiScale = DisplayInfo.GetPrimaryScreenDPIScale();
+            // Get the DPI scale factor for the target screen
+            var targetDpiScale = DisplayInfo.GetDPIScaleForScreen(screen);
 
-            // Convert physical pixels to WPF device-independent units using primary DPI
-            window.Left = screen.Bounds.Left / primaryDpiScale;
-            window.Top = screen.Bounds.Top / primaryDpiScale;
-            window.Width = screen.Bounds.Width / primaryDpiScale;
-            window.Height = screen.Bounds.Height / primaryDpiScale;
+            // Convert physical pixels to WPF device-independent units using the target screen's DPI
+            window.Left = screen.Bounds.Left / targetDpiScale;
+            window.Top = screen.Bounds.Top / targetDpiScale;
+            window.Width = screen.Bounds.Width / targetDpiScale;
+            window.Height = screen.Bounds.Height / targetDpiScale;
         }
 
         private void InitializeTimerEvents()
@@ -101,6 +101,31 @@ namespace ScienceBowlTimer
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartBonus), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartBonus()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.RestartLast), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.RestartLast()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StopQuestionTimer), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StopQuestionTimer()));
+            
+            ////FIXME: DEBUG
+            //_keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey("F1"), () =>
+            //{
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.AppendLine("Screens:");
+            //    var primary = DisplayInfo.GetPrimaryScreen();
+            //    sb.AppendLine($"Primary: {primary.DeviceName} {primary.Bounds} DPI={DisplayInfo.GetDPIScaleForScreen(primary)}");
+            //    var secondary = DisplayInfo.GetSecondaryScreen();
+            //    if (secondary != null)
+            //    {
+            //        sb.AppendLine($"Secondary: {secondary.DeviceName} {secondary.Bounds} DPI={DisplayInfo.GetDPIScaleForScreen(secondary)}");
+            //    }
+            //    sb.AppendLine();
+
+            //    var publicScreen = DisplayInfo.GetScreenFromWindow(_publicDisplay);
+            //    var controlScreen = DisplayInfo.GetScreenFromWindow(_controlPanel);
+
+            //    sb.AppendLine($"PublicDisplay: {_publicDisplay.Left}, {_publicDisplay.Top}, {_publicDisplay.Width}x{_publicDisplay.Height}");
+            //    sb.AppendLine($"  -> Screen: {publicScreen?.DeviceName ?? "NULL"} {publicScreen?.Bounds.ToString() ?? "NULL"}");
+            //    sb.AppendLine($"ControlPanel: {_controlPanel.Left}, {_controlPanel.Top}, {_controlPanel.Width}x{_controlPanel.Height}");
+            //    sb.AppendLine($"  -> Screen: {controlScreen?.DeviceName ?? "NULL"} {controlScreen?.Bounds.ToString() ?? "NULL"}");
+
+            //    System.Windows.MessageBox.Show(sb.ToString(), "Debug Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            //});
         }
 
         private void InitializeButtonHandlers()
@@ -137,8 +162,8 @@ namespace ScienceBowlTimer
         {
             if (!DisplayInfo.IsDualDisplay()) return;
 
-            var currentPublicScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_publicDisplay.Left + 100, (int)_publicDisplay.Top + 100));
-            var currentControlScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_controlPanel.Left + 100, (int)_controlPanel.Top + 100));
+            var currentPublicScreen = DisplayInfo.GetScreenFromWindow(_publicDisplay);
+            var currentControlScreen = DisplayInfo.GetScreenFromWindow(_controlPanel);
 
             if (currentPublicScreen != null && currentControlScreen != null)
             {
