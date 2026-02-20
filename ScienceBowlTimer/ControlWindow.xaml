@@ -43,16 +43,6 @@
                     </Button>
 
                     <Button Grid.Column="1"
-                        x:Name="StartSecondHalfButton"
-                        Style="{StaticResource TouchAwareButton}"
-                        FontSize="28" FontWeight="Bold" 
-                        Background="#2196F3" Foreground="White"
-                        Margin="10"
-                        Click="StartSecondHalf_Click">
-                        <TextBlock Text="Start Second Half" TextAlignment="Center" TextWrapping="Wrap"/>
-                    </Button>
-
-                    <Button Grid.Column="2"
                         x:Name="StartBreakButton"
                         Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
@@ -60,6 +50,16 @@
                         Margin="10"
                         Click="StartBreak_Click">
                         <TextBlock Text="Start Break" TextAlignment="Center" TextWrapping="Wrap"/>
+                    </Button>
+
+                    <Button Grid.Column="2"
+                        x:Name="StartSecondHalfButton"
+                        Style="{StaticResource TouchAwareButton}"
+                        FontSize="28" FontWeight="Bold" 
+                        Background="#2196F3" Foreground="White"
+                        Margin="10"
+                        Click="StartSecondHalf_Click">
+                        <TextBlock Text="Start Second Half" TextAlignment="Center" TextWrapping="Wrap"/>
                     </Button>
 
                     <Button Grid.Column="3"
