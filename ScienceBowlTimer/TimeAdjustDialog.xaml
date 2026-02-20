@@ -30,6 +30,7 @@
 
             <!-- Top Row: M+ and S+ -->
             <Button x:Name="MinutePlusButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="0"
                     Grid.Column="0"
                     Content="M+"
@@ -42,6 +43,7 @@
                     Click="MinutePlus_Click"/>
 
             <Button x:Name="SecondPlusButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Content="S+"
@@ -67,6 +69,7 @@
 
             <!-- Bottom Row: M- and S- -->
             <Button x:Name="MinuteMinusButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="4"
                     Grid.Column="0"
                     Content="M-"
@@ -79,6 +82,7 @@
                     Click="MinuteMinus_Click"/>
 
             <Button x:Name="SecondMinusButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="4"
                     Grid.Column="2"
                     Content="S-"
@@ -92,6 +96,7 @@
 
             <!-- OK/Cancel Row -->
             <Button x:Name="OKButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="6"
                     Grid.Column="0"
                     Content="OK"
@@ -104,6 +109,7 @@
                     Click="OK_Click"/>
 
             <Button x:Name="CancelButton"
+                    Style="{StaticResource TouchAwareButton}"
                     Grid.Row="6"
                     Grid.Column="2"
                     Content="Cancel"

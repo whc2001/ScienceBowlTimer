@@ -34,6 +34,7 @@
 
                     <Button Grid.Column="0"
                         x:Name="StartFirstHalfButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
                         Background="#4CAF50" Foreground="White"
                         Margin="10"
@@ -43,6 +44,7 @@
 
                     <Button Grid.Column="1"
                         x:Name="StartSecondHalfButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
                         Background="#2196F3" Foreground="White"
                         Margin="10"
@@ -52,6 +54,7 @@
 
                     <Button Grid.Column="2"
                         x:Name="StartBreakButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
                         Background="#00BCD4" Foreground="White"
                         Margin="10"
@@ -61,6 +64,7 @@
 
                     <Button Grid.Column="3"
                         x:Name="PauseResumeButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
                         Background="#FF9800" Foreground="White"
                         Margin="10"
@@ -70,6 +74,7 @@
 
                     <Button Grid.Column="4"
                         x:Name="StopTimerButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="28" FontWeight="Bold" 
                         Background="#F44336" Foreground="White"
                         Margin="10"
@@ -80,17 +85,18 @@
 
                     <!-- Manual Adjust Button -->
                     <Button x:Name="AdjustHalfTimerButton"
-                            Content="Set"
-                            FontSize="12"
-                            Background="#424242"
-                            Foreground="White"
-                            Width="60"
-                            Height="20"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Margin="1"
-                            Click="AdjustHalfTimer_Click"
-                            ToolTip="Adjust Half Timer (Only when paused)"/>
+                        Style="{StaticResource TouchAwareButton}"
+                        Content="Set"
+                        FontSize="12"
+                        Background="#FF0000"
+                        Foreground="White"
+                        Width="60"
+                        Height="20"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="1"
+                        Click="AdjustHalfTimer_Click"
+                        ToolTip="Adjust Half Timer (Only when paused)"/>
                 </Grid>
             </GroupBox>
 
@@ -108,6 +114,7 @@
 
                     <Button Grid.Row="0" Grid.Column="0"
                         x:Name="StartTossUpButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="32" FontWeight="Bold" 
                         Background="#FF9800" Foreground="White"
                         Margin="10"
@@ -117,6 +124,7 @@
 
                     <Button Grid.Row="0" Grid.Column="1"
                         x:Name="StartBonusButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="32" FontWeight="Bold" 
                         Background="#9C27B0" Foreground="White"
                         Margin="10"
@@ -126,6 +134,7 @@
 
                     <Button Grid.Row="1" Grid.Column="0"
                         x:Name="RestartLastButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="32" FontWeight="Bold" 
                         Background="#607D8B" Foreground="White"
                         Margin="10"
@@ -135,6 +144,7 @@
 
                     <Button Grid.Row="1" Grid.Column="1"
                         x:Name="StopQuestionTimerButton"
+                        Style="{StaticResource TouchAwareButton}"
                         FontSize="32" FontWeight="Bold" 
                         Background="#795548" Foreground="White"
                         Margin="10"
@@ -148,25 +158,27 @@
 
         <!-- Bottom corner buttons -->
         <Button x:Name="SwapDisplaysButton"
-                Content="Swap"
-                FontSize="12"
-                Background="#424242" Foreground="White"
-                Width="60" Height="20"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="5,5,70,5"
-                Click="SwapDisplays_Click"
-                ToolTip="Swap Displays"/>
+            Style="{StaticResource TouchAwareButton}"
+            Content="Swap"
+            FontSize="12"
+            Background="#626262" Foreground="White"
+            Width="60" Height="20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="5,5,70,5"
+            Click="SwapDisplays_Click"
+            ToolTip="Swap Displays"/>
 
         <Button x:Name="ExitButton"
-                Content="Exit"
-                FontSize="12"
-                Background="#D32F2F" Foreground="White"
-                Width="60" Height="20"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="5"
-                Click="Exit_Click"
-                ToolTip="Exit Application"/>
+            Style="{StaticResource TouchAwareButton}"
+            Content="Exit"
+            FontSize="12"
+            Background="#D32F2F" Foreground="White"
+            Width="60" Height="20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="5"
+            Click="Exit_Click"
+            ToolTip="Exit Application"/>
     </Grid>
 </Window>

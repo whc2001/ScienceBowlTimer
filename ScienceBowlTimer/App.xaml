@@ -3,6 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ScienceBowlTimer">
     <Application.Resources>
+        <!-- Touch-aware button style shared across all windows -->
+        <Style x:Key="TouchAwareButton" TargetType="Button">
+            <Setter Property="local:TouchHelper.Enabled" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#424242"/>
+                            </Trigger>
+                            <!-- Hover: dim -->
+                            <Trigger Property="local:TouchHelper.IsRealMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7"/>
+                            </Trigger>
 
+                            <!-- Press: invert background color -->
+                            <Trigger Property="local:TouchHelper.IsPressedReal" Value="True">
+                                <Setter TargetName="border" Property="Background"
+                                        Value="#222222"/>
+                                <Setter TargetName="border" Property="Opacity" Value="1.0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
