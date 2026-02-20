@@ -3,13 +3,13 @@ using System.Windows;
 
 namespace ScienceBowlTimer
 {
-    public partial class TimeAdjustWindow : Window
+    public partial class TimeAdjustDialog : Window
     {
         private TimeSpan _currentTime;
 
         public TimeSpan Result { get; private set; }
 
-        public TimeAdjustWindow(TimeSpan initialTime)
+        public TimeAdjustDialog(TimeSpan initialTime)
         {
             InitializeComponent();
             _currentTime = initialTime;

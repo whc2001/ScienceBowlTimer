@@ -122,7 +122,7 @@ namespace ScienceBowlTimer
         private TimeSpan? AdjustHalfTimer(TimeSpan currentTime)
         {
             TimeSpan actualTime = _timerManager.GetHalfTimeRemaining();
-            var adjustWindow = new TimeAdjustWindow(actualTime);
+            var adjustWindow = new TimeAdjustDialog(actualTime);
             adjustWindow.Owner = _controlPanel;
 
             if (adjustWindow.ShowDialog() == true)
