@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace ScienceBowlTimer
+namespace ScienceBowlTimer.WinAPI
 {
     /// <summary>
     /// Provides volume control functionality using the Windows Core Audio API.

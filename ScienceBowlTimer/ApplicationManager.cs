@@ -1,3 +1,4 @@
+using ScienceBowlTimer.WinAPI;
 using System;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace ScienceBowlTimer
         private readonly AudioManager _audioManager;
         private readonly GlobalKeyboardHook _keyboardHook;
         private readonly HotkeyConfig _hotkeyConfig;
-        private readonly bool _isDualDisplay;
 
         public ApplicationManager()
         {
@@ -34,33 +34,28 @@ namespace ScienceBowlTimer
 
             // Subscribe to application exit to ensure cleanup
             System.Windows.Application.Current.Exit += OnApplicationExit;
-
-            _isDualDisplay = WinForms.Screen.AllScreens.Length > 1;
         }
 
         public void Start()
         {
-            _publicDisplay.Show();
-
-            if (_isDualDisplay)
+            if (DisplayInfo.IsDualDisplay())
             {
-                PositionWindowsOnDisplays();
+                // Position BEFORE showing to ensure correct placement
+                PositionWindow(_publicDisplay, DisplayInfo.GetSecondaryScreen()!);
+                PositionWindow(_controlPanel, DisplayInfo.GetPrimaryScreen());
+
+                _publicDisplay.Show();
+                _publicDisplay.WindowState = WindowState.Maximized;
+
                 _controlPanel.Show();
+                _controlPanel.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                _publicDisplay.Show();
             }
 
             _keyboardHook.Start();
-        }
-
-        private void PositionWindowsOnDisplays()
-        {
-            var screens = WinForms.Screen.AllScreens;
-            if (screens.Length < 2) return;
-
-            var primaryScreen = screens.First(s => s.Primary);
-            var secondaryScreen = screens.First(s => !s.Primary);
-
-            PositionWindow(_publicDisplay, secondaryScreen);
-            PositionWindow(_controlPanel, primaryScreen);
         }
 
         private void PositionWindow(Window window, WinForms.Screen screen)
@@ -70,55 +65,13 @@ namespace ScienceBowlTimer
 
             // Get DPI scale factor of the PRIMARY monitor for coordinate conversion
             // WPF uses the primary monitor's DPI for virtual screen coordinates
-            var primaryScreen = WinForms.Screen.PrimaryScreen;
-            var primaryDpiScale = primaryScreen != null ? GetDpiScaleForScreen(primaryScreen) : 1.0;
+            var primaryDpiScale = DisplayInfo.GetPrimaryScreenDPIScale();
 
             // Convert physical pixels to WPF device-independent units using primary DPI
             window.Left = screen.Bounds.Left / primaryDpiScale;
             window.Top = screen.Bounds.Top / primaryDpiScale;
             window.Width = screen.Bounds.Width / primaryDpiScale;
             window.Height = screen.Bounds.Height / primaryDpiScale;
-            window.WindowState = WindowState.Maximized;
-            window.Activate();
-        }
-
-        private double GetDpiScaleForScreen(WinForms.Screen screen)
-        {
-            try
-            {
-                // Try to get the DPI for this specific screen
-                var hMonitor = MonitorFromPoint(
-                    new System.Drawing.Point(screen.Bounds.Left + screen.Bounds.Width / 2, screen.Bounds.Top + screen.Bounds.Height / 2),
-                    MONITOR_DEFAULTTONEAREST);
-
-                if (GetDpiForMonitor(hMonitor, DpiType.Effective, out uint dpiX, out uint _) == 0)
-                {
-                    return dpiX / 96.0;
-                }
-            }
-            catch
-            {
-                // Fallback if the API is not available
-            }
-
-            // Fallback to system DPI
-            using var graphics = System.Drawing.Graphics.FromHwnd(IntPtr.Zero);
-            return graphics.DpiX / 96.0;
-        }
-
-        private const int MONITOR_DEFAULTTONEAREST = 2;
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr MonitorFromPoint(System.Drawing.Point pt, int flags);
-
-        [System.Runtime.InteropServices.DllImport("shcore.dll")]
-        private static extern int GetDpiForMonitor(IntPtr hMonitor, DpiType dpiType, out uint dpiX, out uint dpiY);
-
-        private enum DpiType
-        {
-            Effective = 0,
-            Angular = 1,
-            Raw = 2
         }
 
         private void InitializeTimerEvents()
@@ -182,15 +135,13 @@ namespace ScienceBowlTimer
 
         private void SwapDisplays()
         {
-            if (!_isDualDisplay) return;
+            if (!DisplayInfo.IsDualDisplay()) return;
 
             var screens = WinForms.Screen.AllScreens;
             if (screens.Length < 2) return;
 
-            var currentPublicScreen = screens.FirstOrDefault(s =>
-                s.WorkingArea.Contains(new System.Drawing.Point((int)_publicDisplay.Left + 100, (int)_publicDisplay.Top + 100)));
-            var currentControlScreen = screens.FirstOrDefault(s =>
-                s.WorkingArea.Contains(new System.Drawing.Point((int)_controlPanel.Left + 100, (int)_controlPanel.Top + 100)));
+            var currentPublicScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_publicDisplay.Left + 100, (int)_publicDisplay.Top + 100));
+            var currentControlScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_controlPanel.Left + 100, (int)_controlPanel.Top + 100));
 
             if (currentPublicScreen != null && currentControlScreen != null)
             {

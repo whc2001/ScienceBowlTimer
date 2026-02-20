@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
+using ScienceBowlTimer.WinAPI;
 
 namespace ScienceBowlTimer
 {
