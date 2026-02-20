@@ -28,11 +28,12 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0"
                         x:Name="StartFirstHalfButton"
-                        FontSize="32" FontWeight="Bold" 
+                        FontSize="28" FontWeight="Bold" 
                         Background="#4CAF50" Foreground="White"
                         Margin="10"
                         Click="StartFirstHalf_Click">
@@ -41,7 +42,7 @@
 
                     <Button Grid.Column="1"
                         x:Name="StartSecondHalfButton"
-                        FontSize="32" FontWeight="Bold" 
+                        FontSize="28" FontWeight="Bold" 
                         Background="#2196F3" Foreground="White"
                         Margin="10"
                         Click="StartSecondHalf_Click">
@@ -49,17 +50,26 @@
                     </Button>
 
                     <Button Grid.Column="2"
+                        x:Name="StartBreakButton"
+                        FontSize="28" FontWeight="Bold" 
+                        Background="#00BCD4" Foreground="White"
+                        Margin="10"
+                        Click="StartBreak_Click">
+                        <TextBlock Text="Start Break" TextAlignment="Center" TextWrapping="Wrap"/>
+                    </Button>
+
+                    <Button Grid.Column="3"
                         x:Name="PauseResumeButton"
-                        FontSize="32" FontWeight="Bold" 
+                        FontSize="28" FontWeight="Bold" 
                         Background="#FF9800" Foreground="White"
                         Margin="10"
                         Click="PauseResume_Click">
                         <TextBlock Text="Pause / Resume" TextAlignment="Center" TextWrapping="Wrap"/>
                     </Button>
 
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="4"
                         x:Name="StopTimerButton"
-                        FontSize="32" FontWeight="Bold" 
+                        FontSize="28" FontWeight="Bold" 
                         Background="#F44336" Foreground="White"
                         Margin="10"
                         Click="StopTimer_Click">

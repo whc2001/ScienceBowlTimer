@@ -7,6 +7,7 @@ namespace ScienceBowlTimer
     {
         public event Action? StartFirstHalfClicked;
         public event Action? StartSecondHalfClicked;
+        public event Action? StartBreakClicked;
         public event Action? PauseResumeClicked;
         public event Action? StopTimerClicked;
         public event Action? StartTossUpClicked;
@@ -28,6 +29,11 @@ namespace ScienceBowlTimer
         private void StartSecondHalf_Click(object sender, RoutedEventArgs e)
         {
             StartSecondHalfClicked?.Invoke();
+        }
+
+        private void StartBreak_Click(object sender, RoutedEventArgs e)
+        {
+            StartBreakClicked?.Invoke();
         }
 
         private void PauseResume_Click(object sender, RoutedEventArgs e)

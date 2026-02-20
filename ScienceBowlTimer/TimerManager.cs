@@ -7,7 +7,8 @@ namespace ScienceBowlTimer
     {
         None,
         First,
-        Second
+        Second,
+        Break
     }
 
     public enum QuestionType
@@ -54,24 +55,33 @@ namespace ScienceBowlTimer
 
         public void StartFirstHalf()
         {
-            _currentHalf = GameHalf.First;
-            _halfTimeRemaining = TimeSpan.FromMinutes(8);
-            _halfTimer.Stop(); // Stop first to reset the tick cycle
-            _halfTimer.Start();
-            HalfChanged?.Invoke("FIRST HALF");
-            HalfTimerPausedChanged?.Invoke(false);
-            RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
+            StartHalfTimer(GameHalf.First, TimeSpan.FromMinutes(8), "FIRST HALF");
         }
 
         public void StartSecondHalf()
         {
-            _currentHalf = GameHalf.Second;
-            _halfTimeRemaining = TimeSpan.FromMinutes(8);
+            StartHalfTimer(GameHalf.Second, TimeSpan.FromMinutes(8), "SECOND HALF");
+        }
+
+        public void StartBreak()
+        {
+            StartHalfTimer(GameHalf.Break, TimeSpan.FromMinutes(2), "BREAK");
+        }
+
+        /// <summary>
+        /// Common method to start any half timer (halves or break).
+        /// Eliminates code duplication for starting timers with different durations.
+        /// </summary>
+        private void StartHalfTimer(GameHalf half, TimeSpan duration, string displayText)
+        {
+            _currentHalf = half;
+            _halfTimeRemaining = duration;
+            _halfTimerPaused = false;
             _halfTimer.Stop(); // Stop first to reset the tick cycle
             _halfTimer.Start();
-            HalfChanged?.Invoke("SECOND HALF");
-            HalfTimerPausedChanged?.Invoke(false);
+            HalfChanged?.Invoke(displayText);
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
+            HalfTimerPausedChanged?.Invoke(false);
         }
 
         public void StopHalfTimer()

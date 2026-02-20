@@ -91,6 +91,7 @@ namespace ScienceBowlTimer
         {
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartFirstHalf), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartFirstHalf()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartSecondHalf), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartSecondHalf()));
+            _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartBreak), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartBreak()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.PauseResumeTimer), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.PauseResumeHalfTimer()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StopTimer), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StopHalfTimer()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartTossUp), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartTossUp()));
@@ -103,6 +104,7 @@ namespace ScienceBowlTimer
         {
             _controlPanel.StartFirstHalfClicked += () => _timerManager.StartFirstHalf();
             _controlPanel.StartSecondHalfClicked += () => _timerManager.StartSecondHalf();
+            _controlPanel.StartBreakClicked += () => _timerManager.StartBreak();
             _controlPanel.PauseResumeClicked += () => _timerManager.PauseResumeHalfTimer();
             _controlPanel.StopTimerClicked += () => _timerManager.StopHalfTimer();
             _controlPanel.StartTossUpClicked += () => _timerManager.StartTossUp();

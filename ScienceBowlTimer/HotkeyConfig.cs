@@ -8,14 +8,15 @@ namespace ScienceBowlTimer
 {
     public class HotkeyConfig
     {
-        public string StartFirstHalf { get; set; } = "F1";
-        public string StartSecondHalf { get; set; } = "F2";
-        public string PauseResumeTimer { get; set; } = "F3";
-        public string StopTimer { get; set; } = "F4";
-        public string StartTossUp { get; set; } = "F5";
-        public string StartBonus { get; set; } = "F6";
-        public string RestartLast { get; set; } = "F7";
-        public string StopQuestionTimer { get; set; } = "F8";
+        public string StartFirstHalf { get; set; } = "Q";
+        public string StartBreak { get; set; } = "W";
+        public string StartSecondHalf { get; set; } = "E";
+        public string PauseResumeTimer { get; set; } = "R";
+        public string StopTimer { get; set; } = "T";
+        public string StartTossUp { get; set; } = "Z";
+        public string StartBonus { get; set; } = "X";
+        public string RestartLast { get; set; } = "C";
+        public string StopQuestionTimer { get; set; } = "V";
 
         public static HotkeyConfig LoadFromFile(string filePath)
         {

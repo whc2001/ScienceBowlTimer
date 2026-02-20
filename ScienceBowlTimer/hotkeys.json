@@ -1,10 +1,11 @@
 {
-  "StartFirstHalf": "F1",
-  "StartSecondHalf": "F2",
-  "PauseResumeTimer": "F3",
-  "StopTimer": "F4",
-  "StartTossUp": "F5",
-  "StartBonus": "F6",
-  "RestartLast": "F7",
-  "StopQuestionTimer": "F8"
+  "StartFirstHalf": "Q",
+  "StartBreak": "W",
+  "StartSecondHalf": "E",
+  "PauseResumeTimer": "R",
+  "StopTimer": "T",
+  "StartTossUp": "Z",
+  "StartBonus": "X",
+  "RestartLast": "C",
+  "StopQuestionTimer": "V"
 }

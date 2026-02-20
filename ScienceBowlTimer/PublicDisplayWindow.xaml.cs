@@ -10,7 +10,6 @@ namespace ScienceBowlTimer
     /// </summary>
     public partial class PublicDisplayWindow : Window
     {
-        private bool paused = false;
         private readonly DispatcherTimer _blinkTimer;
         private bool _blinkState;
 
