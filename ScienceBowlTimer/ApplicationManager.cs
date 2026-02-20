@@ -67,12 +67,58 @@ namespace ScienceBowlTimer
         {
             window.WindowState = WindowState.Normal;
             window.WindowStartupLocation = WindowStartupLocation.Manual;
-            window.Left = screen.Bounds.Left;
-            window.Top = screen.Bounds.Top;
-            window.Width = screen.Bounds.Width;
-            window.Height = screen.Bounds.Height;
+
+            // Get DPI scale factor of the PRIMARY monitor for coordinate conversion
+            // WPF uses the primary monitor's DPI for virtual screen coordinates
+            var primaryScreen = WinForms.Screen.PrimaryScreen;
+            var primaryDpiScale = primaryScreen != null ? GetDpiScaleForScreen(primaryScreen) : 1.0;
+
+            // Convert physical pixels to WPF device-independent units using primary DPI
+            window.Left = screen.Bounds.Left / primaryDpiScale;
+            window.Top = screen.Bounds.Top / primaryDpiScale;
+            window.Width = screen.Bounds.Width / primaryDpiScale;
+            window.Height = screen.Bounds.Height / primaryDpiScale;
             window.WindowState = WindowState.Maximized;
             window.Activate();
+        }
+
+        private double GetDpiScaleForScreen(WinForms.Screen screen)
+        {
+            try
+            {
+                // Try to get the DPI for this specific screen
+                var hMonitor = MonitorFromPoint(
+                    new System.Drawing.Point(screen.Bounds.Left + screen.Bounds.Width / 2, screen.Bounds.Top + screen.Bounds.Height / 2),
+                    MONITOR_DEFAULTTONEAREST);
+
+                if (GetDpiForMonitor(hMonitor, DpiType.Effective, out uint dpiX, out uint _) == 0)
+                {
+                    return dpiX / 96.0;
+                }
+            }
+            catch
+            {
+                // Fallback if the API is not available
+            }
+
+            // Fallback to system DPI
+            using var graphics = System.Drawing.Graphics.FromHwnd(IntPtr.Zero);
+            return graphics.DpiX / 96.0;
+        }
+
+        private const int MONITOR_DEFAULTTONEAREST = 2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr MonitorFromPoint(System.Drawing.Point pt, int flags);
+
+        [System.Runtime.InteropServices.DllImport("shcore.dll")]
+        private static extern int GetDpiForMonitor(IntPtr hMonitor, DpiType dpiType, out uint dpiX, out uint dpiY);
+
+        private enum DpiType
+        {
+            Effective = 0,
+            Angular = 1,
+            Raw = 2
         }
 
         private void InitializeTimerEvents()
