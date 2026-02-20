@@ -19,17 +19,18 @@
 
             <!-- Half Timer Controls -->
             <GroupBox Grid.Row="0" Header="HALF TIMER" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,20">
-                <Grid Margin="20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0"
                         x:Name="StartFirstHalfButton"
@@ -75,6 +76,21 @@
                         Click="StopTimer_Click">
                         <TextBlock Text="Stop Half Timer" TextAlignment="Center" TextWrapping="Wrap"/>
                     </Button>
+                    </Grid>
+
+                    <!-- Manual Adjust Button -->
+                    <Button x:Name="AdjustHalfTimerButton"
+                            Content="Set"
+                            FontSize="12"
+                            Background="#424242"
+                            Foreground="White"
+                            Width="60"
+                            Height="20"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="1"
+                            Click="AdjustHalfTimer_Click"
+                            ToolTip="Adjust Half Timer (Only when paused)"/>
                 </Grid>
             </GroupBox>
 

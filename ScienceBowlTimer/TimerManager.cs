@@ -81,7 +81,7 @@ namespace ScienceBowlTimer
             _halfTimer.Start();
             HalfChanged?.Invoke(displayText);
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
-            HalfTimerPausedChanged?.Invoke(false);
+            HalfTimerPausedChanged?.Invoke(_halfTimerPaused);
         }
 
         public void StopHalfTimer()
@@ -89,7 +89,7 @@ namespace ScienceBowlTimer
             _halfTimer.Stop();
             _halfTimerPaused = false;
             _currentHalf = GameHalf.None;
-            HalfTimerPausedChanged?.Invoke(false);
+            HalfTimerPausedChanged?.Invoke(_halfTimerPaused);
             HalfChanged?.Invoke("--");
             RemainingTimeChanged?.Invoke("-:--");
         }
@@ -115,6 +115,20 @@ namespace ScienceBowlTimer
                 _halfTimer.Stop();
                 _halfTimerPaused = true;
                 HalfTimerPausedChanged?.Invoke(_halfTimerPaused);
+            }
+        }
+
+        public TimeSpan GetHalfTimeRemaining()
+        {
+            return _halfTimeRemaining;
+        }
+
+        public void SetHalfTimeRemaining(TimeSpan newTime)
+        {
+            if (newTime.TotalSeconds >= 1 && _halfTimerPaused && _currentHalf != GameHalf.None)
+            {
+                _halfTimeRemaining = newTime;
+                RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
             }
         }
 

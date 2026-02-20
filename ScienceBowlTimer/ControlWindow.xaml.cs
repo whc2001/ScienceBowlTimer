@@ -15,10 +15,26 @@ namespace ScienceBowlTimer
         public event Action? RestartLastClicked;
         public event Action? StopQuestionTimerClicked;
         public event Action? SwapDisplaysClicked;
+        public event Func<TimeSpan, TimeSpan?>? AdjustHalfTimerClicked;
+
+        private bool _isHalfTimerPaused;
 
         public ControlWindow()
         {
             InitializeComponent();
+            _isHalfTimerPaused = false;
+            UpdateAdjustButtonState();
+        }
+
+        public void SetHalfTimerPaused(bool isPaused)
+        {
+            _isHalfTimerPaused = isPaused;
+            UpdateAdjustButtonState();
+        }
+
+        private void UpdateAdjustButtonState()
+        {
+            AdjustHalfTimerButton.IsEnabled = _isHalfTimerPaused;
         }
 
         private void StartFirstHalf_Click(object sender, RoutedEventArgs e)
@@ -69,6 +85,17 @@ namespace ScienceBowlTimer
         private void SwapDisplays_Click(object sender, RoutedEventArgs e)
         {
             SwapDisplaysClicked?.Invoke();
+        }
+
+        private void AdjustHalfTimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_isHalfTimerPaused) return;
+
+            if (AdjustHalfTimerClicked != null)
+            {
+                TimeSpan currentTime = TimeSpan.Zero;
+                TimeSpan? adjustedTime = AdjustHalfTimerClicked.Invoke(currentTime);
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

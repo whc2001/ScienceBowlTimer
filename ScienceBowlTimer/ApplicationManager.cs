@@ -84,7 +84,11 @@ namespace ScienceBowlTimer
             _timerManager.HalfFinished += () => _audioManager.PlayHalfFinished();
             _timerManager.QuestionTimeUp += () => _audioManager.PlayTime();
             _timerManager.BonusFiveSeconds += () => _audioManager.PlayFiveSeconds();
-            _timerManager.HalfTimerPausedChanged += paused => _publicDisplay.SetHalfTimerPaused(paused);
+            _timerManager.HalfTimerPausedChanged += paused =>
+            {
+                _publicDisplay.SetHalfTimerPaused(paused);
+                _controlPanel.SetHalfTimerPaused(paused);
+            };
         }
 
         private void InitializeHotkeys()
@@ -112,6 +116,22 @@ namespace ScienceBowlTimer
             _controlPanel.RestartLastClicked += () => _timerManager.RestartLast();
             _controlPanel.StopQuestionTimerClicked += () => _timerManager.StopQuestionTimer();
             _controlPanel.SwapDisplaysClicked += SwapDisplays;
+            _controlPanel.AdjustHalfTimerClicked += AdjustHalfTimer;
+        }
+
+        private TimeSpan? AdjustHalfTimer(TimeSpan currentTime)
+        {
+            TimeSpan actualTime = _timerManager.GetHalfTimeRemaining();
+            var adjustWindow = new TimeAdjustWindow(actualTime);
+            adjustWindow.Owner = _controlPanel;
+
+            if (adjustWindow.ShowDialog() == true)
+            {
+                _timerManager.SetHalfTimeRemaining(adjustWindow.Result);
+                return adjustWindow.Result;
+            }
+
+            return null;
         }
 
         private void SwapDisplays()

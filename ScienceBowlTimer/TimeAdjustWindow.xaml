@@ -1,0 +1,119 @@
+<Window x:Class="ScienceBowlTimer.TimeAdjustWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScienceBowlTimer"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#2d2d2d"
+        SizeToContent="WidthAndHeight"
+        Topmost="True">
+    <Border BorderBrush="White" BorderThickness="2" Padding="30">
+        <Grid VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Top Row: M+ and S+ -->
+            <Button x:Name="MinutePlusButton"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="M+"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="MinutePlus_Click"/>
+
+            <Button x:Name="SecondPlusButton"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Content="S+"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="SecondPlus_Click"/>
+
+            <!-- Time Display -->
+            <TextBlock x:Name="TimeDisplay"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Text="0:00"
+                       FontSize="72"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Margin="20,10"/>
+
+            <!-- Bottom Row: M- and S- -->
+            <Button x:Name="MinuteMinusButton"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="M-"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="MinuteMinus_Click"/>
+
+            <Button x:Name="SecondMinusButton"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Content="S-"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="SecondMinus_Click"/>
+
+            <!-- OK/Cancel Row -->
+            <Button x:Name="OKButton"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Content="OK"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="OK_Click"/>
+
+            <Button x:Name="CancelButton"
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    Content="Cancel"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#F44336"
+                    Foreground="White"
+                    Width="80"
+                    Height="60"
+                    Click="Cancel_Click"/>
+        </Grid>
+    </Border>
+</Window>
