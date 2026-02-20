@@ -137,9 +137,6 @@ namespace ScienceBowlTimer
         {
             if (!DisplayInfo.IsDualDisplay()) return;
 
-            var screens = WinForms.Screen.AllScreens;
-            if (screens.Length < 2) return;
-
             var currentPublicScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_publicDisplay.Left + 100, (int)_publicDisplay.Top + 100));
             var currentControlScreen = DisplayInfo.GetScreenFromPoint(new System.Drawing.Point((int)_controlPanel.Left + 100, (int)_controlPanel.Top + 100));
 
@@ -147,6 +144,9 @@ namespace ScienceBowlTimer
             {
                 PositionWindow(_publicDisplay, currentControlScreen);
                 PositionWindow(_controlPanel, currentPublicScreen);
+
+                _publicDisplay.WindowState = WindowState.Maximized;
+                _controlPanel.WindowState = WindowState.Maximized;
             }
         }
 
