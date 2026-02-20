@@ -19,47 +19,79 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Top Row: M+ and S+ -->
-            <Button x:Name="MinutePlusButton"
+            <!-- Top Row: M+10 M+1 | S+1 S+10 -->
+            <Button x:Name="MinutePlus10Button"
                     Style="{StaticResource TouchAwareButton}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Content="M+"
-                    FontSize="28"
+                    Content="M+10"
+                    FontSize="24"
                     FontWeight="Bold"
                     Background="#607D8B"
                     Foreground="White"
-                    Width="80"
-                    Height="60"
-                    Click="MinutePlus_Click"/>
+                    Width="70"
+                    Height="50"
+                    Click="MinutePlus10_Click"/>
 
-            <Button x:Name="SecondPlusButton"
+            <Button x:Name="MinutePlus1Button"
                     Style="{StaticResource TouchAwareButton}"
                     Grid.Row="0"
                     Grid.Column="2"
-                    Content="S+"
-                    FontSize="28"
+                    Content="M+1"
+                    FontSize="24"
                     FontWeight="Bold"
                     Background="#607D8B"
                     Foreground="White"
-                    Width="80"
-                    Height="60"
-                    Click="SecondPlus_Click"/>
+                    Width="70"
+                    Height="50"
+                    Click="MinutePlus1_Click"/>
+
+            <Button x:Name="SecondPlus1Button"
+                    Style="{StaticResource TouchAwareButton}"
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    Content="S+1"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="70"
+                    Height="50"
+                    Click="SecondPlus1_Click"/>
+
+            <Button x:Name="SecondPlus10Button"
+                    Style="{StaticResource TouchAwareButton}"
+                    Grid.Row="0"
+                    Grid.Column="6"
+                    Content="S+10"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="70"
+                    Height="50"
+                    Click="SecondPlus10_Click"/>
 
             <!-- Time Display -->
             <TextBlock x:Name="TimeDisplay"
                        Grid.Row="2"
                        Grid.Column="0"
-                       Grid.ColumnSpan="3"
+                       Grid.ColumnSpan="7"
                        Text="0:00"
                        FontSize="72"
                        FontWeight="Bold"
@@ -67,58 +99,85 @@
                        HorizontalAlignment="Center"
                        Margin="20,10"/>
 
-            <!-- Bottom Row: M- and S- -->
-            <Button x:Name="MinuteMinusButton"
+            <!-- Bottom Row: M-10 M-1 | S-1 S-10 -->
+            <Button x:Name="MinuteMinus10Button"
                     Style="{StaticResource TouchAwareButton}"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Content="M-"
-                    FontSize="28"
+                    Content="M-10"
+                    FontSize="24"
                     FontWeight="Bold"
                     Background="#607D8B"
                     Foreground="White"
-                    Width="80"
-                    Height="60"
-                    Click="MinuteMinus_Click"/>
+                    Width="70"
+                    Height="50"
+                    Click="MinuteMinus10_Click"/>
 
-            <Button x:Name="SecondMinusButton"
+            <Button x:Name="MinuteMinus1Button"
                     Style="{StaticResource TouchAwareButton}"
                     Grid.Row="4"
                     Grid.Column="2"
-                    Content="S-"
-                    FontSize="28"
+                    Content="M-1"
+                    FontSize="24"
                     FontWeight="Bold"
                     Background="#607D8B"
                     Foreground="White"
-                    Width="80"
-                    Height="60"
-                    Click="SecondMinus_Click"/>
+                    Width="70"
+                    Height="50"
+                    Click="MinuteMinus1_Click"/>
+
+            <Button x:Name="SecondMinus1Button"
+                    Style="{StaticResource TouchAwareButton}"
+                    Grid.Row="4"
+                    Grid.Column="4"
+                    Content="S-1"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="70"
+                    Height="50"
+                    Click="SecondMinus1_Click"/>
+
+            <Button x:Name="SecondMinus10Button"
+                    Style="{StaticResource TouchAwareButton}"
+                    Grid.Row="4"
+                    Grid.Column="6"
+                    Content="S-10"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Background="#607D8B"
+                    Foreground="White"
+                    Width="70"
+                    Height="50"
+                    Click="SecondMinus10_Click"/>
 
             <!-- OK/Cancel Row -->
             <Button x:Name="OKButton"
                     Style="{StaticResource TouchAwareButton}"
-                    Grid.Row="6"
+                    Grid.Row="8"
                     Grid.Column="0"
+                    Grid.ColumnSpan="3"
                     Content="OK"
                     FontSize="24"
                     FontWeight="Bold"
                     Background="#4CAF50"
                     Foreground="White"
-                    Width="80"
                     Height="60"
+                    Margin="5,0,0,0"
                     Click="OK_Click"/>
-
             <Button x:Name="CancelButton"
                     Style="{StaticResource TouchAwareButton}"
-                    Grid.Row="6"
-                    Grid.Column="2"
+                    Grid.Row="8"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="3"
                     Content="Cancel"
                     FontSize="24"
                     FontWeight="Bold"
                     Background="#F44336"
                     Foreground="White"
-                    Width="80"
                     Height="60"
+                    Margin="0,0,5,0"
                     Click="Cancel_Click"/>
         </Grid>
     </Border>
