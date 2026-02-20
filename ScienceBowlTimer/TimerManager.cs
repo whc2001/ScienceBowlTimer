@@ -27,6 +27,7 @@ namespace ScienceBowlTimer
         private GameHalf _currentHalf;
         private int _lastQuestionSeconds;
         private bool _questionTimerStopped;
+        private bool _halfTimerPaused;
 
         public event Action<string>? HalfChanged;
         public event Action<string>? RemainingTimeChanged;
@@ -35,6 +36,7 @@ namespace ScienceBowlTimer
         public event Action? HalfFinished;
         public event Action? QuestionTimeUp;
         public event Action? BonusFiveSeconds;
+        public event Action<bool>? HalfTimerPausedChanged;
 
         public TimerManager()
         {
@@ -57,6 +59,7 @@ namespace ScienceBowlTimer
             _halfTimer.Stop(); // Stop first to reset the tick cycle
             _halfTimer.Start();
             HalfChanged?.Invoke("FIRST HALF");
+            HalfTimerPausedChanged?.Invoke(false);
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
         }
 
@@ -67,15 +70,42 @@ namespace ScienceBowlTimer
             _halfTimer.Stop(); // Stop first to reset the tick cycle
             _halfTimer.Start();
             HalfChanged?.Invoke("SECOND HALF");
+            HalfTimerPausedChanged?.Invoke(false);
             RemainingTimeChanged?.Invoke(FormatTime(_halfTimeRemaining));
         }
 
         public void StopHalfTimer()
         {
             _halfTimer.Stop();
+            _halfTimerPaused = false;
             _currentHalf = GameHalf.None;
-            HalfChanged?.Invoke("-");
+            HalfTimerPausedChanged?.Invoke(false);
+            HalfChanged?.Invoke("--");
             RemainingTimeChanged?.Invoke("-:--");
+        }
+
+        public void PauseResumeHalfTimer()
+        {
+            if (_currentHalf == GameHalf.None || _halfTimeRemaining.TotalSeconds == 0)
+            {
+                // No half timer running, do nothing
+                return;
+            }
+
+            if (_halfTimerPaused)
+            {
+                // Resume
+                _halfTimer.Start();
+                _halfTimerPaused = false;
+                HalfTimerPausedChanged?.Invoke(_halfTimerPaused);
+            }
+            else
+            {
+                // Pause
+                _halfTimer.Stop();
+                _halfTimerPaused = true;
+                HalfTimerPausedChanged?.Invoke(_halfTimerPaused);
+            }
         }
 
         public void StartTossUp()

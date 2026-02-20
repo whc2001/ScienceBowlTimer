@@ -10,7 +10,8 @@ namespace ScienceBowlTimer
     {
         public string StartFirstHalf { get; set; } = "F1";
         public string StartSecondHalf { get; set; } = "F2";
-        public string StopTimer { get; set; } = "F3";
+        public string PauseResumeTimer { get; set; } = "F3";
+        public string StopTimer { get; set; } = "F4";
         public string StartTossUp { get; set; } = "F5";
         public string StartBonus { get; set; } = "F6";
         public string RestartLast { get; set; } = "F7";

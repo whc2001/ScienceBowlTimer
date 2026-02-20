@@ -84,12 +84,14 @@ namespace ScienceBowlTimer
             _timerManager.HalfFinished += () => _audioManager.PlayHalfFinished();
             _timerManager.QuestionTimeUp += () => _audioManager.PlayTime();
             _timerManager.BonusFiveSeconds += () => _audioManager.PlayFiveSeconds();
+            _timerManager.HalfTimerPausedChanged += paused => _publicDisplay.SetHalfTimerPaused(paused);
         }
 
         private void InitializeHotkeys()
         {
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartFirstHalf), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartFirstHalf()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartSecondHalf), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartSecondHalf()));
+            _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.PauseResumeTimer), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.PauseResumeHalfTimer()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StopTimer), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StopHalfTimer()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartTossUp), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartTossUp()));
             _keyboardHook.RegisterHotkey(HotkeyConfig.ParseHotkey(_hotkeyConfig.StartBonus), () => _controlPanel.Dispatcher.Invoke(() => _timerManager.StartBonus()));
@@ -101,6 +103,7 @@ namespace ScienceBowlTimer
         {
             _controlPanel.StartFirstHalfClicked += () => _timerManager.StartFirstHalf();
             _controlPanel.StartSecondHalfClicked += () => _timerManager.StartSecondHalf();
+            _controlPanel.PauseResumeClicked += () => _timerManager.PauseResumeHalfTimer();
             _controlPanel.StopTimerClicked += () => _timerManager.StopHalfTimer();
             _controlPanel.StartTossUpClicked += () => _timerManager.StartTossUp();
             _controlPanel.StartBonusClicked += () => _timerManager.StartBonus();

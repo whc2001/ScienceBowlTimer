@@ -1,7 +1,8 @@
 {
   "StartFirstHalf": "F1",
   "StartSecondHalf": "F2",
-  "StopTimer": "F3",
+  "PauseResumeTimer": "F3",
+  "StopTimer": "F4",
   "StartTossUp": "F5",
   "StartBonus": "F6",
   "RestartLast": "F7",
