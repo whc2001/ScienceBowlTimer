@@ -9,7 +9,7 @@
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.25*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         
@@ -21,13 +21,13 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,20">
-                <TextBlock Text="CURRENT HALF" FontSize="32" Foreground="#AAAAAA" FontWeight="Bold"/>
-                <TextBlock x:Name="CurrentHalfText" Text="-" FontSize="64" Foreground="White" FontWeight="Bold" Margin="0,10,0,0"/>
+                <TextBlock Text="CURRENT HALF" FontSize="56" Foreground="#AAAAAA" FontWeight="Bold"/>
+                <TextBlock x:Name="CurrentHalfText" Text="-" FontSize="128" Foreground="White" FontWeight="Bold" Margin="0,10,0,0"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="40,20">
-                <TextBlock Text="REMAINING TIME" FontSize="32" Foreground="#AAAAAA" FontWeight="Bold" TextAlignment="Right"/>
-                <TextBlock x:Name="RemainingTimeText" Text="-:--" FontSize="64" Foreground="White" FontWeight="Bold" Margin="0,10,0,0" TextAlignment="Right"/>
+                <TextBlock Text="REMAINING TIME" FontSize="56" Foreground="#AAAAAA" FontWeight="Bold" TextAlignment="Right"/>
+                <TextBlock x:Name="RemainingTimeText" Text="-:--" FontSize="128" Foreground="White" FontWeight="Bold" Margin="0,10,0,0" TextAlignment="Right"/>
             </StackPanel>
         </Grid>
         
